@@ -7,9 +7,10 @@
 
 A modern IP reputation checking tool that leverages AI and multiple API integrations to verify the quality of IPv4 addresses. This project provides a centralized service for IP reputation analysis using AI-powered tools and multiple threat intelligence sources with a modular, maintainable architecture.
 
+## Features
 
 - AI-powered IP reputation analysis using Ollama
-- Integration with AbuseIPDB API for threat intelligence
+- Integration with AbuseIPDB API for threat intelligence (1000 checks/month for free tier)
 - Multiple reputation sources (VirusTotal, Cisco Talos, MXToolbox, etc.)
 - Caching mechanism using DuckDB for improved performance
 - FastAPI-based web interface
@@ -19,7 +20,7 @@ A modern IP reputation checking tool that leverages AI and multiple API integrat
 
 - Python 3.13.9 (recommended due to grpcio compatibility issues with Python 3.14)
 - Ollama with a compatible model (e.g., qwen3:latest)
-- AbuseIPDB API key
+- AbuseIPDB API key (register at [https://www.abuseipdb.com/register#individual](https://www.abuseipdb.com/register#individual))
 
 ## Installation
 
@@ -66,27 +67,27 @@ uv run python -m src.api
 │   CLI / API     │───▶│  IPCheckService │───▶│  Ollama Agent   │
 │                 │    │                  │    │                 │
 └─────────────────┘    └──────────────────┘    └─────────────────┘
-                              │
-                              ▼
-                    ┌──────────────────┐
-                    │  DatabaseManager │
-                    │  (DuckDB Cache)  │
-                    └──────────────────┘
-                              │
-                              ▼
-                   ┌─────────────────────┐
-                   │  External Services  │
-                   │ (AbuseIPDB, VT, etc)│
-                   └─────────────────────┘
+                               │
+                               ▼
+                     ┌──────────────────┐
+                     │  DatabaseManager │
+                     │  (DuckDB Cache)  │
+                     └──────────────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │  External Services  │
+                    │ (AbuseIPDB, VT, etc)│
+                    └─────────────────────┘
 ```
 
 The architecture follows a service-oriented design with centralized IP checking logic, standardized error handling, and configuration management.
+
 ## Usage
 
 ### Prerequisites
 
 If you encounter issues with grpcio compilation, ensure you're using Python 3.13.9 in your virtual environment as there are known compatibility issues with Python 3.14. You can verify your Python version in the activated virtual environment with `python --version`.
-
 
 ### Command Line Interface
 
@@ -157,3 +158,22 @@ The project uses a configuration system through `config/settings.py` which suppo
 - AbuseIPDB API key (`ABUSEIPDB_API_KEY`)
 - Service URLs (`VIRUSTOTAL_URL`, `ABUSEIPDB_CHECK_URL`, etc.)
 - Analysis thresholds (`ABUSE_CONFIDENCE_THRESHOLD`)
+
+## Rate Limits
+
+The AbuseIPDB API has rate limits that you should be aware of:
+- Free tier: 1000 requests per day
+- For more information: [https://www.abuseipdb.com/api.html](https://www.abuseipdb.com/api.html)
+- To register for an API key: [https://www.abuseipdb.com/register#individual](https://www.abuseipdb.com/register#individual)
+
+## Contributing
+
+Please read `CONTRIBUTING.md` for details on our code of conduct and the process for submitting pull requests.
+
+## Security
+
+Please read `SECURITY.md` for information on reporting security vulnerabilities.
+
+## License
+
+This project is licensed under the MIT License - see the `LICENSE` file for details.
