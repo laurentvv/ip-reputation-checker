@@ -1,0 +1,54 @@
+[project]
+name = "ip-reputation-checker"
+version = "0.1.0"
+description = "A modern IP reputation checking tool using AI and API integrations"
+readme = "README.md"
+requires-python = ">=3.13"
+license = {text = "MIT"}
+authors = [
+    {name = "Developer", email = "laurentvv@gmail.com"}
+]
+
+dependencies = [
+    "duckdb",
+    "smolagents[litellm]",
+    "requests",
+    "python-dotenv",
+    "fastapi",
+    "uvicorn",
+    "pydantic",
+    "beautifulsoup4",
+    "duckduckgo-search",
+    "httpx",
+    "scrapy",
+    "dnspython",
+    "googlesearch-python",
+    "playwright",
+    "python-whois",
+    "ddgs",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "black",
+    "mypy",
+    "ruff",
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "black",
+    "mypy",
+    "ruff",
+]
