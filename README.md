@@ -1,8 +1,12 @@
 # IP Reputation Checker
 
-A modern IP reputation checking tool that leverages AI and multiple API integrations to verify the quality of IPv4 addresses.
+[![GitHub stars](https://img.shields.io/github/stars/laurentvv/ip-reputation-checker.svg)](https://github.com/laurentvv/ip-reputation-checker/stargazers)
+[![GitHub license](https://img.shields.io/github/license/laurentvv/ip-reputation-checker.svg)](https://github.com/laurentvv/ip-reputation-checker/blob/main/LICENSE)
+[![Python Version](https://img.shields.io/badge/python-3.13.9+-blue.svg)](https://www.python.org/downloads/)
+[![Status](https://img.shields.io/badge/status-active-success.svg)](https://github.com/laurentvv/ip-reputation-checker)
 
-## Features
+A modern IP reputation checking tool that leverages AI and multiple API integrations to verify the quality of IPv4 addresses. This project provides a centralized service for IP reputation analysis using AI-powered tools and multiple threat intelligence sources with a modular, maintainable architecture.
+
 
 - AI-powered IP reputation analysis using Ollama
 - Integration with AbuseIPDB API for threat intelligence
@@ -26,7 +30,7 @@ pip install uv
 
 2. Clone the repository and navigate to the project directory:
 ```bash
-git clone <repository-url>
+git clone https://github.com/laurentvv/ip-reputation-checker.git
 cd ip-reputation-checker
 ```
 
@@ -44,6 +48,39 @@ uv venv --python 3.13
 ```bash
 uv sync
 ```
+
+## Quick Start
+
+```bash
+# Check a single IP address
+uv run python -m src.main 8.8.8.8
+
+# Start the API server
+uv run python -m src.api
+```
+
+## Architecture Overview
+
+```
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   CLI / API     │───▶│  IPCheckService │───▶│  Ollama Agent   │
+│                 │    │                  │    │                 │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+                              │
+                              ▼
+                    ┌──────────────────┐
+                    │  DatabaseManager │
+                    │  (DuckDB Cache)  │
+                    └──────────────────┘
+                              │
+                              ▼
+                   ┌─────────────────────┐
+                   │  External Services  │
+                   │ (AbuseIPDB, VT, etc)│
+                   └─────────────────────┘
+```
+
+The architecture follows a service-oriented design with centralized IP checking logic, standardized error handling, and configuration management.
 ## Usage
 
 ### Prerequisites
