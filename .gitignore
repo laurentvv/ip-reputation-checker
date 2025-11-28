@@ -94,7 +94,6 @@ ENV/
 .venv/
 .env/
 .ENV/
-*/
 
 # IDEs
 .vscode/
